@@ -1,1 +1,1 @@
-python prog/csv_sum.py  test1.csv -c latitude longitude altitude
+python prog/csv_sum.py  test1.csv -c latitude

@@ -1,1 +1,1 @@
-python prog/wc.py foo.txt
+python prog/wc.py bar.txt
