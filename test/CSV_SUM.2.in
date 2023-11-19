@@ -1,0 +1,1 @@
+cat test1.csv | python prog/csv_sum.py -c latitude longitude altitude

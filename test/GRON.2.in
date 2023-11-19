@@ -1,0 +1,1 @@
+cat eg.json | python prog/gron.py

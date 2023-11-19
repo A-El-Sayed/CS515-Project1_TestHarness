@@ -15,13 +15,29 @@ def wc(files, args):
     total_words = 0
     total_chars = 0
 
+    if not sys.stdin.isatty():
+        file_contents = sys.stdin.read()
+        num_of_lines, num_of_words, num_of_chars = count_of_input(file_contents)
+
+        output = ""
+        if args.lines:
+            output += f"       {num_of_lines}"
+        if args.words:
+            output += f"       {num_of_words}"
+        if args.characters:
+            output += f"       {num_of_chars}"
+        if not args.lines and not args.characters and not args.words:
+            output += f"       {num_of_lines}       {num_of_words}       {num_of_chars}"
+        print(f"{output}")
+        sys.exit(0)
+
     for filename in files:
         try:
             with open(filename, 'r') as file:
                 file_contents = file.read()
         except (FileNotFoundError, IOError) as e:
             print(f"Error: {e}")
-            sys.exit[1]
+            sys.exit(1)
 
         num_of_lines, num_of_words, num_of_chars = count_of_input(file_contents)
 
@@ -31,25 +47,25 @@ def wc(files, args):
 
         output = ""
         if args.lines:
-            output += f"\t{num_of_lines}"
+            output += f"       {num_of_lines}"
         if args.words:
-            output += f"\t{num_of_words}"
+            output += f"       {num_of_words}"
         if args.characters:
-            output += f"\t{num_of_chars}"
+            output += f"       {num_of_chars}"
         if not args.lines and not args.characters and not args.words:
-            output += f"\t{num_of_lines}\t{num_of_words}\t{num_of_chars}"
+            output += f"       {num_of_lines}       {num_of_words}       {num_of_chars}"
         print(f"{output} {filename}")
 
     if len(files) > 1:
         output_total = ""
         if args.lines:
-            output_total += f"\t{total_lines}"
+            output_total += f"       {total_lines}"
         if args.words:
-            output_total += f"\t{total_words}"
+            output_total += f"       {total_words}"
         if args.characters:
-            output_total += f"\t{total_chars}"
+            output_total += f"       {total_chars}"
         if args.lines is False and args.characters is False and args.words is False:
-            output_total += f"\t{total_lines}\t{total_words}\t{total_chars}"
+            output_total += f"       {total_lines}       {total_words}       {total_chars}"
         print(f"{output_total} total")
 
 
@@ -64,5 +80,6 @@ def main():
     args = parser.parse_args()
     wc(args.files, args)
     sys.exit(0)
+
 if __name__ == "__main__":
     main()

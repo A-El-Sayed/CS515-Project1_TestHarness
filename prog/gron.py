@@ -22,13 +22,12 @@ def print_gron(data,base_obj='json', indent=0, parent=""):
 
 def main():
     parser =  argparse.ArgumentParser(description='Gron Flattening JSOn Program')
-    # parser.add_argument('filename', nargs="?", type=argparse.FileType('r'), default = sys.stdin, help='include file (default is STD)')
-    parser.add_argument('filename', type=str, help='include file (default is STD)')
+    parser.add_argument('filename', nargs="?", type=argparse.FileType('r'), default = sys.stdin, help='include file (default is STD)')
     parser.add_argument('--obj', metavar='base_object', default="json", help='new base object (default is "json")')
     args = parser.parse_args()
 
     try:
-        data = json.load(open(args.filename))
+        data = json.load(args.filename)
         print_gron(data, base_obj = args.obj)
     except Exception as e:
         print(f"Error: {e}")
